@@ -128,10 +128,10 @@ addEventListener('keyup', e => { keys[e.code] = false; });
 
 function readIntent() {
   let moveX = 0, moveZ = 0;
-  if (keys['KeyW'] || keys['ArrowUp']) moveZ -= 1;
-  if (keys['KeyS'] || keys['ArrowDown']) moveZ += 1;
-  if (keys['KeyA'] || keys['ArrowLeft']) moveX -= 1;
-  if (keys['KeyD'] || keys['ArrowRight']) moveX += 1;
+  if (keys['KeyW'] || keys['ArrowUp']) moveZ += 1;
+  if (keys['KeyS'] || keys['ArrowDown']) moveZ -= 1;
+  if (keys['KeyA'] || keys['ArrowLeft']) moveX += 1;
+  if (keys['KeyD'] || keys['ArrowRight']) moveX -= 1;
   return { moveX, moveZ, sprint: !!(keys['ShiftLeft'] || keys['ShiftRight']), action: !!keys['KeyE'] };
 }
 

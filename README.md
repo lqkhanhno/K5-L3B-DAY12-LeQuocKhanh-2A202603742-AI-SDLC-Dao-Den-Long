@@ -3,7 +3,7 @@
 > **Đảo Đèn Lồng** — game 3D góc nhìn thứ ba, làm trong lab Day 12 *AI SDLC*: áp dụng quy trình phần mềm cùng AI qua 4 phase.
 > Sinh viên: **Lê Quốc Khánh — 2A202603742**. Repo cá nhân, nộp theo [SUBMISSION.md](SUBMISSION.md) của lab.
 >
-> 🎬 **Video demo:** *(điền link Release v1.0.0 hoặc docs/demo/demo.mp4 — xem CP5)*
+> 🎬 **Video demo:** `docs/demo/demo.mp4`
 > 🏷️ **Bản phát hành:** `v1.0.0` — kèm `dist/dao-den-long.zip` chạy được không cần mạng.
 
 ## 🎮 Chạy game (tối đa 3 lệnh, không cần cài package)
