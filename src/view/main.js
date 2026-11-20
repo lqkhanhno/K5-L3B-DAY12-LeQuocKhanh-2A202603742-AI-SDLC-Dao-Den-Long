@@ -26,7 +26,7 @@ const lanternLight = new THREE.PointLight(0xffc357, 2.2, 14, 1.6);
 scene.add(lanternLight);
 
 // ---- Thế giới: đảo, biển, đom đóm, đèn lồng, Bóng Mực ----
-const world = createWorld({ seed: 2026, fireflyCount: 12, lanternCount: 3, inkCount: 1 });
+const world = createWorld({ seed: 2026, fireflyCount: 12, lanternCount: 3, inkCount: 2 });
 
 // Đảo: đĩa tròn
 const island = new THREE.Mesh(
@@ -74,7 +74,7 @@ const fireflyMeshes = world.fireflies.map(f => {
   return m;
 });
 
-// Đèn Lồng Lớn: cột + lồng đèn; khi thắp thì sáng
+// Đèn Lồng Lớn: cột + lồng đèn; khi thắp thì sáng. [Phase 2] hiển thị số đom đóm cần (required).
 const lanternMeshes = world.lanterns.map(l => {
   const g = new THREE.Group();
   const pole = new THREE.Mesh(
@@ -90,6 +90,21 @@ const lanternMeshes = world.lanterns.map(l => {
   const light = new THREE.PointLight(0xffb347, 0, 25, 1.4);
   light.position.y = 3.2;
   g.add(light);
+  // Bảng nhỏ hiển thị "xN" — số đom đóm cần để thắp (canvas texture).
+  const cv = document.createElement('canvas');
+  cv.width = 128; cv.height = 64;
+  const ctx = cv.getContext('2d');
+  ctx.fillStyle = '#101828';
+  ctx.fillRect(0, 0, 128, 64);
+  ctx.fillStyle = '#ffd977';
+  ctx.font = 'bold 44px system-ui';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(`x${l.required}`, 64, 34);
+  const sign = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(cv) }));
+  sign.scale.set(1.4, 0.7, 1);
+  sign.position.y = 4.1;
+  g.add(sign);
   g.position.set(l.x, 0, l.z);
   scene.add(g);
   return { group: g, lamp, light };

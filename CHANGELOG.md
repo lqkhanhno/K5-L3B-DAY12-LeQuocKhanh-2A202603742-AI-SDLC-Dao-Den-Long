@@ -2,6 +2,14 @@
 
 Tất cả thay đổi đáng nhớ của dự án. Tag phase tương ứng với mốc phát hành.
 
+## [phase-2] — 2026-11-20 (Ticket-02)
+
+- Đèn Lồng Lớn cần `requiredFireflies` (mặc định 3) đom đóm để thắp; thiếu thì có sự kiện `lantern_rejected` (R2.1).
+- Bóng Mực từ 2 con trở lên chuyển chế độ **bao vây**: trong bán kính 6 thì vòng quanh người chơi thay vì lao thẳng (R2.3).
+- Headless output bổ sung `required` từng đèn + tổng `firefliesSpent` (R2.2).
+- View: bảng "xN" trên đèn lồng hiển thị số đom đóm cần; thế giới mặc định có 2 Bóng Mực.
+- 18 → **25 test** (thêm 7 test Phase 2), 2 scenario, hồi quy xanh. Bằng chứng: `docs/proof/phase-2.md`.
+
 ## [phase-1] — 2026-11-20
 
 - Khung dự án không npm install: Node thuần cho logic, Three.js qua CDN cho view.

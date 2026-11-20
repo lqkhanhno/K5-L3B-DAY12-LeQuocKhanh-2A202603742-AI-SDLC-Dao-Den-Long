@@ -8,6 +8,7 @@ Ghi lại: phase nào, dùng AI làm gì, AI sai ở đâu và phát hiện th�
 |---|---|---|---|---|
 | 2026-11-20 | CP0 | Đọc 6 file đề, chốt kiến trúc (Three.js qua CDN + core thuần Node), viết AGENTS.md, skill verify-game | — | ~40k input / ~8k output |
 | 2026-11-20 | P1 | Viết core logic + headless + 18 test + view + README + bằng chứng | 3 lỗi bắt được bằng chạy thật: (1) await trong vòng lặp đồng bộ; (2) luật thua áp cho thế giới trống; (3) 3 test sai kịch bản vị trí. Khắc phục: sửa code/test, ghi bài học vào AGENTS.md | ~60k input / ~15k output |
+| 2026-11-20 | P2 | Ticket-02 tự định nghĩa; luật required + bao vây; 7 test mới; scenario bao-vay; bằng chứng | Lỗi import/tham chiếu không đồng bộ (C/WORLD) làm 17/18 đỏ một lần — hồi quy bắt ngay, sửa 1 dòng. Ghi bài học "grep trước khi đổi import" vào AGENTS.md | ~35k input / ~10k output |
 
 ## Bài học tiết kiệm token
 

@@ -1,0 +1,43 @@
+{
+  "scenario": "co-ban-gom-va-thap",
+  "seed": 7,
+  "ticks": 10,
+  "status": "won",
+  "player": {
+    "x": 1.8,
+    "z": 0,
+    "fireflies": 0
+  },
+  "lanterns": [
+    {
+      "x": 2,
+      "z": 0,
+      "lit": true,
+      "required": 1
+    }
+  ],
+  "firefliesCollected": 1,
+  "firefliesTotal": 2,
+  "firefliesSpent": 1,
+  "elapsedSeconds": 0.3333,
+  "events": [
+    {
+      "tick": 0,
+      "type": "firefly_collected",
+      "id": 0,
+      "x": 0.5,
+      "z": 0
+    },
+    {
+      "tick": 9,
+      "type": "lantern_lit",
+      "x": 2,
+      "z": 0,
+      "remainingFireflies": 0
+    },
+    {
+      "tick": 9,
+      "type": "game_won"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "bao-vay",
+  "description": "[Ticket-02 / R2.5] 2 Bóng Mực bắt đầu trong followRadius -> chuyển chế độ vòng quanh. Người chơi đứng yên có đom đóm phải sống sót 5 giây không mất đom đóm nào (chứng minh orbit không lao vào).",
+  "world": {
+    "seed": 11,
+    "fireflyCount": 3,
+    "lanternCount": 1,
+    "lanternRequiredFireflies": [3],
+    "fireflyPositions": [{ "x": 0.5, "z": 0 }, { "x": 0.6, "z": 0 }, { "x": 0.7, "z": 0 }],
+    "lanternPositions": [{ "x": 25, "z": 25 }],
+    "inkCount": 2,
+    "inkPositions": [{ "x": 4, "z": 0 }, { "x": -4, "z": 0 }]
+  },
+  "script": [
+    { "ticks": 150, "moveX": 0, "moveZ": 0 }
+  ],
+  "expect": {
+    "status": "playing",
+    "firefliesCollected": 3,
+    "eventsInclude": []
+  }
+}

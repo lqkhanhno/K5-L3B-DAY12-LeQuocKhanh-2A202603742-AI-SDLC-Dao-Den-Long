@@ -31,3 +31,4 @@ node tools/run_tests.mjs                           # chạy toàn bộ test + sc
 - Node không cho `await` trong vòng lặp đồng bộ trong module: khi viết script quét file, dùng `readFileSync` thay vì await import trong callback của `test()`.
 - Luật điều kiện thắng/thua phải xử lý cả trường hợp degenerate (thế giới trống): kiểm tra `length > 0` trước khi tuyên bố thua theo danh sách rỗng.
 - Khi viết test scenario, đặt vị trí thực thể CỐ ĐỊNH qua params thay vì để seed sinh — test ý định phải đích xác, không phụ thuộc ngẫu nhiên.
+- Import và tham chiếu phải đồng bộ: nếu đổi `import { X }` thành `import * as C`, phải đổi TẤT CẢ tham chiếu trong file (grep `X\.` trước khi commit). Lỗi này đã xảy ra 2 lần trong Phase 2.
