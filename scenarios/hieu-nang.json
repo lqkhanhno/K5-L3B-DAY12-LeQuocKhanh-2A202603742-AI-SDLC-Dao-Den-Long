@@ -1,0 +1,29 @@
+{
+  "name": "hieu-nang-100k-tick",
+  "description": "[Ticket-04 / R4.1] Scenario đo hiệu năng: 100.000 tick (≈55 phút game) — người chơi đi vòng quanh đảo. Phải hoàn thành < 5 giây và tất định tuyệt đối.",
+  "world": {
+    "seed": 42,
+    "timeLimitSeconds": 3400,
+    "fireflyCount": 12,
+    "lanternCount": 3,
+    "lanternRequiredFireflies": [3, 3, 3],
+    "fireflyPositions": [
+      { "x": 2, "z": 0 }, { "x": -2, "z": 0 }, { "x": 0, "z": 2 },
+      { "x": 10, "z": 10 }, { "x": -10, "z": 10 }, { "x": 10, "z": -10 },
+      { "x": -10, "z": -10 }, { "x": 20, "z": 0 }, { "x": -20, "z": 0 },
+      { "x": 0, "z": 20 }, { "x": 0, "z": -20 }, { "x": 5, "z": 15 }
+    ],
+    "lanternPositions": [{ "x": 3, "z": 0 }, { "x": -3, "z": 0 }, { "x": 0, "z": -3 }],
+    "inkCount": 2,
+    "inkPositions": [{ "x": 15, "z": 15 }, { "x": -15, "z": -15 }]
+  },
+  "script": [
+    { "ticks": 60000, "moveX": 1, "moveZ": 0, "sprint": true },
+    { "ticks": 20000, "moveX": 0, "moveZ": 1 },
+    { "ticks": 19999, "moveX": -1, "moveZ": 0 },
+    { "ticks": 1, "moveX": 0, "moveZ": 0 }
+  ],
+  "expect": {
+    "status": "playing"
+  }
+}

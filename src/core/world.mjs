@@ -4,6 +4,7 @@
 // PRD-0 chưa nêu bố cục cụ thể: bố cục dưới đây là GIẢ ĐỊNH, khai báo qua params.
 
 import * as C from './constants.mjs';
+import { ROUND } from './constants.mjs';
 
 // PRNG mulberry32 — nhỏ, nhanh, tất định, đủ cho sinh thế giới.
 export function mulberry32(seed) {
@@ -63,5 +64,11 @@ export function createWorld(params = {}) {
     inks.push({ id: i, x: p.x, z: p.z, dirX: 0, dirZ: 0, fleeing: false });
   }
 
-  return { seed, params, player, lanterns, fireflies, inks, elapsedSeconds: 0, status: 'playing' };
+  return {
+    seed, params, player, lanterns, fireflies, inks,
+    elapsedSeconds: 0,
+    // [Phase 4] timeLimit ép qua params (dùng cho scenario đo hiệu năng cần chạy dài hơn mặc định).
+    timeLimitSeconds: params.timeLimitSeconds ?? ROUND.timeLimitSeconds,
+    status: 'playing',
+  };
 }

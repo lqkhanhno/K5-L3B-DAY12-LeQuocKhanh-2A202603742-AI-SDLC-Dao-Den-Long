@@ -124,7 +124,7 @@ export function step(world, input = {}) {
     // dùng cho test di chuyển) thì không thua ngay mà chờ time_out.
     world.status = 'lost';
     events.push({ type: 'game_lost', reason: 'all_fireflies_lost' });
-  } else if (world.elapsedSeconds >= C.ROUND.timeLimitSeconds) {
+  } else if (world.elapsedSeconds >= (world.timeLimitSeconds ?? C.ROUND.timeLimitSeconds)) {
     world.status = 'lost';
     events.push({ type: 'game_lost', reason: 'time_out' });
   }

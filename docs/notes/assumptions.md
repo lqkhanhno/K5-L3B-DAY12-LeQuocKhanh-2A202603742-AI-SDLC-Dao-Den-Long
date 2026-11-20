@@ -36,4 +36,10 @@ Xem `requirements-source.md` — lab board không dùng; PRD-0 suy ra từ READM
 | A14 | Tốc độ bỏ chạy và vùng sáng | `lightRadius=5`, `fleeSpeed=4.0` (> chase 3.2 để thoát ánh sáng nhanh hơn đuổi, < walk 6.0 để người chơi vẫn né được); Bóng Mực thoát vùng sáng rồi quay lại đuổi | cân bằng: đèn thắp là trú ẩn tạm, không phải bất tử |
 | A14b | Gom + thắp cùng tick | Chấp nhận: đom đóm nằm giữa người chơi và đèn thì gom và tự thắp xảy ra cùng tick (thứ tự trong step: gom trước, thắp sau) | ghi trong design-changes.md |
 
+## Phase 4 (Ticket-04 — `docs/notes/tickets/ticket-04.md`)
+
+| # | Chỗ mơ hồ | Giả định đã chọn | Ghi chú |
+|---|---|---|---|
+| A15 | Ngưỡng hiệu năng cụ thể | 100k tick < 5s; tạo thế giới lớn < 100ms; chạy 10 lần không quá 2× lần đầu | đề không có số — tự đặt ngưỡng khắt khe, ghi nguồn ngưỡng (máy dev nhanh gấp ~4× máy chấm dự kiến) |
+
 Mọi con số trên nằm tập trung trong `src/core/constants.mjs` — phase sau đổi luật chỉ sửa một file.
