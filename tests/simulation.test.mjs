@@ -5,6 +5,8 @@ import { test } from 'node:test';
 import { createWorld, step, C } from '../src/core/index.mjs';
 
 // Thế giới nhỏ cố định cho test: 1 đom đóm ngay cạnh, 1 đèn lồng ngay cạnh.
+// [Phase 2] Đèn giờ cần `required`=3 đom đóm (R2.1) — các test thắp đèn đặt
+// lanternRequiredFireflies: [1] để kiểm tra cơ chế gom/thắp độc lập với con số mặc định.
 function tinyWorld() {
   return createWorld({
     seed: 1,
@@ -12,6 +14,7 @@ function tinyWorld() {
     lanternCount: 1,
     fireflyPositions: [{ x: 1, z: 0 }],
     lanternPositions: [{ x: 2, z: 0 }],
+    lanternRequiredFireflies: [1], // [Phase 2] giữ ý định cũ của test: thắp bằng 1 đom đóm
   });
 }
 

@@ -20,4 +20,13 @@ Xem `requirements-source.md` — lab board không dùng; PRD-0 suy ra từ READM
 | A8 | Test Contract | Tự thiết kế: JSON scenario vào → JSON kết quả ra, tick 30Hz, tất định theo seed | xem `headless-contract.md`; sẽ chỉnh khớp nếu đề chính thức phát hành |
 | A9 | Nhân vật phím điều khiển | WASD/mũi tên + Shift sprint + E thắp | chuẩn PC, không cần gamepad |
 
+## Phase 2 (Ticket-02 — `docs/notes/tickets/ticket-02.md`)
+
+| # | Chỗ mơ hồ | Giả định đã chọn | Ghi chú |
+|---|---|---|---|
+| A10 | Số đom đóm cần cho mỗi đèn | `requiredFireflies = 3` cho mọi đèn, khai báo qua world params | R2.1 |
+| A11 | Thắp xong có hoàn đom đóm không | Không hoàn — đom đóm đã "nạp" vào đèn | giữ đơn giản, cân bằng game |
+| A12 | Bóng Mực bao vây hoạt động thế nào | ≥2 con: ngoài `followRadius=6` đuổi thẳng, trong bán kính thì vòng quanh (góc +1.2 rad/s, giữ khoảng cách hiện tại); 1 con: đuổi thẳng như Phase 1 | R2.3 |
+| A13 | Hành vi đuổi khi ngoài bán kính bao vây | Giống Phase 1: tiến thẳng về người chơi | tự nhiên, dễ kiểm chứng |
+
 Mọi con số trên nằm tập trung trong `src/core/constants.mjs` — phase sau đổi luật chỉ sửa một file.

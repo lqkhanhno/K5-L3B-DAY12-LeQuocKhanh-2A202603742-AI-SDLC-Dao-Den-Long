@@ -3,7 +3,7 @@
 // bất kể platform hay thời điểm. Đây là nền tảng của Test Contract.
 // PRD-0 chưa nêu bố cục cụ thể: bố cục dưới đây là GIẢ ĐỊNH, khai báo qua params.
 
-import { WORLD } from './constants.mjs';
+import * as C from './constants.mjs';
 
 // PRNG mulberry32 — nhỏ, nhanh, tất định, đủ cho sinh thế giới.
 export function mulberry32(seed) {
@@ -42,21 +42,24 @@ export function createWorld(params = {}) {
   const lanterns = [];
   for (let i = 0; i < lanternCount; i++) {
     const p = (params.lanternPositions && params.lanternPositions[i]) ||
-      rndPointInCircle(rnd, WORLD.radius * 0.6);
-    lanterns.push({ x: p.x, z: p.z, lit: false });
+      rndPointInCircle(rnd, C.WORLD.radius * 0.6);
+    // [Phase 2 / R2.1] mỗi đèn khai báo số đom đóm cần; mặc định theo constants, ép được qua params.
+    const required = (params.lanternRequiredFireflies && params.lanternRequiredFireflies[i]) ??
+      C.LANTERN.requiredFireflies;
+    lanterns.push({ x: p.x, z: p.z, lit: false, required });
   }
 
   const fireflies = [];
   for (let i = 0; i < fireflyCount; i++) {
     const p = (params.fireflyPositions && params.fireflyPositions[i]) ||
-      rndPointInCircle(rnd, WORLD.radius * 0.9);
+      rndPointInCircle(rnd, C.WORLD.radius * 0.9);
     fireflies.push({ id: i, x: p.x, z: p.z, collected: false });
   }
 
   const inks = [];
   for (let i = 0; i < inkCount; i++) {
     const p = (params.inkPositions && params.inkPositions[i]) ||
-      rndPointInCircle(rnd, WORLD.radius * 0.7);
+      rndPointInCircle(rnd, C.WORLD.radius * 0.7);
     inks.push({ id: i, x: p.x, z: p.z, dirX: 0, dirZ: 0 });
   }
 

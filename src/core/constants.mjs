@@ -23,7 +23,8 @@ export const FIREFLY = {
 // Đèn Lồng Lớn
 export const LANTERN = {
   litRadius: 1.6,        // khoảng cách thắp đèn
-  lightPerFirefly: 20,   // % đèn được thắp mỗi đom đóm nạp (giả định)
+  lightPerFirefly: 20,   // (Phase 1, không còn dùng sau R2.1 — giữ để hồi quy tham chiếu)
+  requiredFireflies: 3,  // [Phase 2 / R2.1] số đom đóm cần để thắp mỗi đèn
 };
 
 // Bóng Mực — kẻ địch
@@ -31,7 +32,9 @@ export const INK = {
   speed: 3.2,
   radius: 0.7,
   catchRadius: 1.0,      // khoảng cách bị bắt
-  drainOnCatch: 2,       // số đom đóm mất khi bị chạm (giả định)
+  drainOnCatch: 2,       // số đom đóm mất khi bị chạm
+  followRadius: 6,       // [Phase 2 / R2.3] trong bán kính này, Bóng Mực vòng quanh thay vì lao thẳng
+  orbitAngularSpeed: 1.2, // [Phase 2] tốc độ góc vòng quanh (rad/giây)
 };
 
 // Thời gian và thắng/thua
