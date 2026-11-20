@@ -1,0 +1,66 @@
+{
+  "scenario": "an-toan",
+  "seed": 11,
+  "ticks": 300,
+  "status": "playing",
+  "player": {
+    "x": 0,
+    "z": 0,
+    "fireflies": 0
+  },
+  "lanterns": [
+    {
+      "x": 1,
+      "z": 0,
+      "lit": true,
+      "required": 3
+    },
+    {
+      "x": 0,
+      "z": 30,
+      "lit": false,
+      "required": 3
+    }
+  ],
+  "inks": [
+    {
+      "x": 5.92,
+      "z": 0,
+      "fleeing": false
+    }
+  ],
+  "firefliesCollected": 3,
+  "firefliesTotal": 3,
+  "firefliesSpent": 3,
+  "elapsedSeconds": 10,
+  "events": [
+    {
+      "tick": 0,
+      "type": "firefly_collected",
+      "id": 0,
+      "x": 0.5,
+      "z": 0
+    },
+    {
+      "tick": 0,
+      "type": "firefly_collected",
+      "id": 1,
+      "x": 0.6,
+      "z": 0
+    },
+    {
+      "tick": 0,
+      "type": "firefly_collected",
+      "id": 2,
+      "x": 0.7,
+      "z": 0
+    },
+    {
+      "tick": 0,
+      "type": "lantern_lit",
+      "x": 1,
+      "z": 0,
+      "remainingFireflies": 0
+    }
+  ]
+}

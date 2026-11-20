@@ -1,0 +1,58 @@
+{
+  "scenario": "bao-vay",
+  "seed": 11,
+  "ticks": 150,
+  "status": "playing",
+  "player": {
+    "x": 0,
+    "z": 0,
+    "fireflies": 3
+  },
+  "lanterns": [
+    {
+      "x": 25,
+      "z": 25,
+      "lit": false,
+      "required": 3
+    }
+  ],
+  "inks": [
+    {
+      "x": -2.3858,
+      "z": -3.0803,
+      "fleeing": false
+    },
+    {
+      "x": 2.3858,
+      "z": 3.0803,
+      "fleeing": false
+    }
+  ],
+  "firefliesCollected": 3,
+  "firefliesTotal": 3,
+  "firefliesSpent": 0,
+  "elapsedSeconds": 5,
+  "events": [
+    {
+      "tick": 0,
+      "type": "firefly_collected",
+      "id": 0,
+      "x": 0.5,
+      "z": 0
+    },
+    {
+      "tick": 0,
+      "type": "firefly_collected",
+      "id": 1,
+      "x": 0.6,
+      "z": 0
+    },
+    {
+      "tick": 0,
+      "type": "firefly_collected",
+      "id": 2,
+      "x": 0.7,
+      "z": 0
+    }
+  ]
+}

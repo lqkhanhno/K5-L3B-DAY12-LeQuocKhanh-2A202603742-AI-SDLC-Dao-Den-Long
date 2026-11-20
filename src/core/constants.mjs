@@ -35,6 +35,8 @@ export const INK = {
   drainOnCatch: 2,       // số đom đóm mất khi bị chạm
   followRadius: 6,       // [Phase 2 / R2.3] trong bán kính này, Bóng Mực vòng quanh thay vì lao thẳng
   orbitAngularSpeed: 1.2, // [Phase 2] tốc độ góc vòng quanh (rad/giây)
+  lightRadius: 5,        // [Phase 3 / R3.2] trong bán kính đèn ĐÃ THẮP thì Bóng Mực bỏ chạy
+  fleeSpeed: 4.0,        // [Phase 3] tốc độ bỏ chạy khỏi ánh sáng
 };
 
 // Thời gian và thắng/thua

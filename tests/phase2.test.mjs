@@ -5,34 +5,45 @@ import { test } from 'node:test';
 import { createWorld, step, C } from '../src/core/index.mjs';
 
 // ---- R2.1: đèn cần required đom đóm ----
+// [Phase 3 / R3.4] Luật thắp ĐỔI từ "nhấn E" sang "tự thắp khi đủ điều kiện" — các test này
+// được sửa theo luật mới (bỏ bước nhấn action). Ý định kiểm tra (trừ đúng required,
+// ép params) giữ nguyên. Test lantern_rejected ĐÃ BỎ theo R3.1 — thay bằng test "im lặng".
 
-test('R2.1: đèn mặc định cần 3 đom đóm — đủ thì thắp, trừ đúng 3', () => {
+test('R2.1: đèn mặc định cần 3 đom đóm — đứng đủ gần và đủ thì TỰ thắp, trừ đúng 3', () => {
   const w = createWorld({
     seed: 1, fireflyCount: 5, lanternCount: 1,
+    // [Phase 3] Đèn ở XA ngoài litRadius để tách bạch: tick đầu chỉ gom, không thắp;
+    // rồi di chuyển lại gần — đủ điều kiện tick nào là thắp tick đó (không cần action).
     fireflyPositions: [{ x: 0.5, z: 0 }, { x: 0.6, z: 0 }, { x: 0.7, z: 0 }, { x: -20, z: -20 }, { x: -21, z: -21 }],
-    lanternPositions: [{ x: 1, z: 0 }],
+    lanternPositions: [{ x: 8, z: 0 }],
   });
-  step(w, {}); // gom 3 đom đóm gần chỗ đứng
+  step(w, {}); // gom 3 đom đóm; đèn xa (8 > 1.6) nên chưa thắp
   assert.equal(w.player.fireflies, 3);
-  step(w, { action: true });
-  assert.equal(w.lanterns[0].lit, true);
+  assert.equal(w.lanterns[0].lit, false);
+  const events = step(w, { moveX: 1, moveZ: 0 }); // tiến gần thêm; chưa đủ gần
+  assert.equal(w.lanterns[0].lit, false);
+  // Tiến tiếp đến trong litRadius — tick nào đủ điều kiện là tự thắp tick đó.
+  let litTick = -1;
+  for (let i = 0; i < 60; i++) {
+    const ev = step(w, { moveX: 1, moveZ: 0 });
+    if (w.lanterns[0].lit) { litTick = i; assert.ok(ev.some(e => e.type === 'lantern_lit')); break; }
+  }
+  assert.ok(litTick >= 0, 'phải tự thắp khi đi vào bán kính');
   assert.equal(w.player.fireflies, 0); // trừ đúng 3
 });
 
-test('R2.1: thiếu đom đóm thì KHÔNG thắp, KHÔNG mất, có sự kiện lantern_rejected (have/need)', () => {
+test('R2.1/R3.1: thiếu đom đóm thì không thắp, không mất, KHÔNG có sự kiện nào (im lặng)', () => {
   const w = createWorld({
     seed: 1, fireflyCount: 2, lanternCount: 1,
     fireflyPositions: [{ x: 0.5, z: 0 }, { x: 0.6, z: 0 }],
     lanternPositions: [{ x: 1, z: 0 }],
   });
   step(w, {}); // có 2 < 3
-  const events = step(w, { action: true });
+  const events = step(w, {});
   assert.equal(w.lanterns[0].lit, false);
   assert.equal(w.player.fireflies, 2); // không mất
-  const rej = events.find(e => e.type === 'lantern_rejected');
-  assert.ok(rej, 'phải có lantern_rejected');
-  assert.equal(rej.have, 2);
-  assert.equal(rej.need, 3);
+  assert.equal(events.find(e => e.type === 'lantern_lit'), undefined);
+  assert.equal(events.find(e => e.type === 'lantern_rejected'), undefined); // sự kiện này đã bị bỏ
 });
 
 test('R2.1: required ép qua params được tôn trọng', () => {

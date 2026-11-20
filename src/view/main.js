@@ -148,6 +148,7 @@ function updateCamera() {
 }
 
 // ---- Vòng lặp: logic theo tick cố định, render theo rAF ----
+// [Phase 3] thắp đèn tự động — phím E đã bỏ; HUD ghi chú luật mới.
 let acc = 0;
 let last = performance.now();
 const hudFireflies = document.getElementById('hud-fireflies');
@@ -183,6 +184,8 @@ function frame(now) {
   });
   world.inks.forEach((ink, i) => {
     inkMeshes[i].position.set(ink.x, 1 + Math.sin(now / 700 + i) * 0.15, ink.z);
+    // [Phase 3] Bóng Mực đang bỏ chạy khỏi ánh sáng thì nhạt màu đi.
+    inkMeshes[i].material.opacity = ink.fleeing ? 0.55 : 0.92;
   });
 
   updateCamera();

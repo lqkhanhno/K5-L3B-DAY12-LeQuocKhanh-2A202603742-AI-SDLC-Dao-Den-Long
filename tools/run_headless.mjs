@@ -58,6 +58,7 @@ function main() {
       fireflies: world.player.fireflies,
     },
     lanterns: world.lanterns.map(l => ({ x: round(l.x), z: round(l.z), lit: l.lit, required: l.required })),
+    inks: world.inks.map(i => ({ x: round(i.x), z: round(i.z), fleeing: i.fleeing })), // [Phase 3 / R3.5]
     firefliesCollected: world.fireflies.filter(f => f.collected).length,
     firefliesTotal: world.fireflies.length,
     firefliesSpent: world.lanterns.filter(l => l.lit).reduce((s, l) => s + l.required, 0),

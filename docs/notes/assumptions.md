@@ -29,4 +29,11 @@ Xem `requirements-source.md` — lab board không dùng; PRD-0 suy ra từ READM
 | A12 | Bóng Mực bao vây hoạt động thế nào | ≥2 con: ngoài `followRadius=6` đuổi thẳng, trong bán kính thì vòng quanh (góc +1.2 rad/s, giữ khoảng cách hiện tại); 1 con: đuổi thẳng như Phase 1 | R2.3 |
 | A13 | Hành vi đuổi khi ngoài bán kính bao vây | Giống Phase 1: tiến thẳng về người chơi | tự nhiên, dễ kiểm chứng |
 
+## Phase 3 (Ticket-03 — `docs/notes/tickets/ticket-03.md`)
+
+| # | Chỗ mơ hồ | Giả định đã chọn | Ghi chú |
+|---|---|---|---|
+| A14 | Tốc độ bỏ chạy và vùng sáng | `lightRadius=5`, `fleeSpeed=4.0` (> chase 3.2 để thoát ánh sáng nhanh hơn đuổi, < walk 6.0 để người chơi vẫn né được); Bóng Mực thoát vùng sáng rồi quay lại đuổi | cân bằng: đèn thắp là trú ẩn tạm, không phải bất tử |
+| A14b | Gom + thắp cùng tick | Chấp nhận: đom đóm nằm giữa người chơi và đèn thì gom và tự thắp xảy ra cùng tick (thứ tự trong step: gom trước, thắp sau) | ghi trong design-changes.md |
+
 Mọi con số trên nằm tập trung trong `src/core/constants.mjs` — phase sau đổi luật chỉ sửa một file.

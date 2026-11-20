@@ -1,6 +1,6 @@
 {
   "name": "co-ban-gom-va-thap",
-  "description": "Scenario cơ bản: gom 1 đom đóm gần chỗ đứng, tiến về đèn lồng và thắp. [Phase 2] đèn đặt required=1 để giữ ý định gốc; luật required mặc định=3 được test riêng ở scenario khác.",
+  "description": "Scenario cơ bản: gom 1 đom đóm gần chỗ đứng, tiến về đèn lồng và thắp. [Phase 3 / R3.4] luật thắp tự động — bỏ action khỏi script. [Phase 2] đèn đặt required=1 để giữ ý định gốc.",
   "world": {
     "seed": 7,
     "fireflyCount": 2,
@@ -12,7 +12,7 @@
   "script": [
     { "ticks": 1, "moveX": 0, "moveZ": 0 },
     { "ticks": 8, "moveX": 1, "moveZ": 0 },
-    { "ticks": 1, "moveX": 1, "moveZ": 0, "action": true }
+    { "ticks": 1, "moveX": 1, "moveZ": 0 }
   ],
   "expect": {
     "status": "won",

@@ -37,14 +37,19 @@ test('đom đóm xa thì chưa gom được', () => {
 });
 
 test('giữ action cạnh đèn lồng còn tối, có đom đóm -> thắp được', () => {
-  const w = tinyWorld();
-  step(w, {}); // gom đom đóm
-  // Người chơi ở (0,0), đèn ở (2,0), litRadius=1.6 -> 2 > 1.6: phải tiến lại trước.
-  for (let i = 0; i < 5; i++) step(w, { moveX: 1, moveZ: 0 });
-  const events = step(w, { action: true });
+  // [Phase 3 / R3.4] Luật MỚI: thắp TỰ ĐỘNG khi đủ điều kiện (không còn phím E, không cần nhấn).
+  // Đèn đặt (1.2, 0) trong litRadius=1.6 so với gốc: gom đom đóm và tự thắp trong cùng tick.
+  const w = createWorld({
+    seed: 1, fireflyCount: 1, lanternCount: 1,
+    fireflyPositions: [{ x: 1, z: 0 }],
+    lanternPositions: [{ x: 1.2, z: 0 }],
+    lanternRequiredFireflies: [1],
+  });
+  const events = step(w, {});
+  assert.ok(events.some(e => e.type === 'firefly_collected'));
+  assert.ok(events.some(e => e.type === 'lantern_lit'));
   assert.equal(w.lanterns[0].lit, true);
   assert.equal(w.player.fireflies, 0);
-  assert.ok(events.some(e => e.type === 'lantern_lit'));
 });
 
 test('không có đom đóm thì không thắp được đèn', () => {

@@ -1,0 +1,22 @@
+{
+  "name": "an-toan",
+  "description": "[Ticket-03 / R3.3] Người chơi tự thắp đèn A ngay từ đầu (đủ 3 đom đóm, đứng trong litRadius). Bóng Mực đuổi từ xa: khi vào vùng sáng lightRadius=5 nó phải bỏ chạy — 10 giây không chạm được người chơi.",
+  "world": {
+    "seed": 11,
+    "fireflyCount": 3,
+    "lanternCount": 2,
+    "lanternRequiredFireflies": [3, 3],
+    "fireflyPositions": [{ "x": 0.5, "z": 0 }, { "x": 0.6, "z": 0 }, { "x": 0.7, "z": 0 }],
+    "lanternPositions": [{ "x": 1, "z": 0 }, { "x": 0, "z": 30 }],
+    "inkCount": 1,
+    "inkPositions": [{ "x": 12, "z": 0 }]
+  },
+  "script": [
+    { "ticks": 300, "moveX": 0, "moveZ": 0 }
+  ],
+  "expect": {
+    "status": "playing",
+    "firefliesCollected": 3,
+    "eventsInclude": ["lantern_lit"]
+  }
+}

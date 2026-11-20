@@ -1,0 +1,196 @@
+TAP version 13
+# Subtest: R2.1: đèn mặc định cần 3 đom đóm — đứng đủ gần và đủ thì TỰ thắp, trừ đúng 3
+ok 1 - R2.1: đèn mặc định cần 3 đom đóm — đứng đủ gần và đủ thì TỰ thắp, trừ đúng 3
+  ---
+  duration_ms: 26.112854
+  type: 'test'
+  ...
+# Subtest: R2.1/R3.1: thiếu đom đóm thì không thắp, không mất, KHÔNG có sự kiện nào (im lặng)
+ok 2 - R2.1/R3.1: thiếu đom đóm thì không thắp, không mất, KHÔNG có sự kiện nào (im lặng)
+  ---
+  duration_ms: 0.977943
+  type: 'test'
+  ...
+# Subtest: R2.1: required ép qua params được tôn trọng
+ok 3 - R2.1: required ép qua params được tôn trọng
+  ---
+  duration_ms: 1.316
+  type: 'test'
+  ...
+# Subtest: R2.3: 1 con vẫn đuổi thẳng (hành vi Phase 1 giữ nguyên)
+ok 4 - R2.3: 1 con vẫn đuổi thẳng (hành vi Phase 1 giữ nguyên)
+  ---
+  duration_ms: 3.270236
+  type: 'test'
+  ...
+# Subtest: R2.3: 2 con trong followRadius thì vòng quanh — khoảng cách giữ gần nguyên, không lao vào
+ok 5 - R2.3: 2 con trong followRadius thì vòng quanh — khoảng cách giữ gần nguyên, không lao vào
+  ---
+  duration_ms: 10.946575
+  type: 'test'
+  ...
+# Subtest: R2.3: ngoài followRadius thì vẫn tiến về người chơi
+ok 6 - R2.3: ngoài followRadius thì vẫn tiến về người chơi
+  ---
+  duration_ms: 1.552918
+  type: 'test'
+  ...
+# Subtest: R3.1: phím E KHÔNG còn tác dụng — nhấn E khi thiếu đom đóm không có sự kiện gì
+ok 7 - R3.1: phím E KHÔNG còn tác dụng — nhấn E khi thiếu đom đóm không có sự kiện gì
+  ---
+  duration_ms: 0.670054
+  type: 'test'
+  ...
+# Subtest: R3.2: Bóng Mực trong lightRadius của đèn đã thắp thì bỏ chạy ra xa đèn
+ok 8 - R3.2: Bóng Mực trong lightRadius của đèn đã thắp thì bỏ chạy ra xa đèn
+  ---
+  duration_ms: 2.139655
+  type: 'test'
+  ...
+# Subtest: R3.2: fleeing=true khi trong vùng sáng, false khi không
+ok 9 - R3.2: fleeing=true khi trong vùng sáng, false khi không
+  ---
+  duration_ms: 10.193849
+  type: 'test'
+  ...
+# Subtest: R3.2: đèn CHƯA thắp không khiến Bóng Mực bỏ chạy
+ok 10 - R3.2: đèn CHƯA thắp không khiến Bóng Mực bỏ chạy
+  ---
+  duration_ms: 2.126035
+  type: 'test'
+  ...
+# Subtest: R3.3: người chơi cạnh đèn đã thắp — Bóng Mực không lại gần hơn lightRadius
+ok 11 - R3.3: người chơi cạnh đèn đã thắp — Bóng Mực không lại gần hơn lightRadius
+  ---
+  duration_ms: 5.224757
+  type: 'test'
+  ...
+# Subtest: đi đến gần đom đóm thì gom được
+ok 12 - đi đến gần đom đóm thì gom được
+  ---
+  duration_ms: 1.747151
+  type: 'test'
+  ...
+# Subtest: đom đóm xa thì chưa gom được
+ok 13 - đom đóm xa thì chưa gom được
+  ---
+  duration_ms: 26.327278
+  type: 'test'
+  ...
+# Subtest: giữ action cạnh đèn lồng còn tối, có đom đóm -> thắp được
+ok 14 - giữ action cạnh đèn lồng còn tối, có đom đóm -> thắp được
+  ---
+  duration_ms: 0.650426
+  type: 'test'
+  ...
+# Subtest: không có đom đóm thì không thắp được đèn
+ok 15 - không có đom đóm thì không thắp được đèn
+  ---
+  duration_ms: 0.364843
+  type: 'test'
+  ...
+# Subtest: thắp đèn cuối cùng -> thắng
+ok 16 - thắp đèn cuối cùng -> thắng
+  ---
+  duration_ms: 0.38741
+  type: 'test'
+  ...
+# Subtest: hết thời gian -> thua vì time_out
+ok 17 - hết thời gian -> thua vì time_out
+  ---
+  duration_ms: 24.984724
+  type: 'test'
+  ...
+# Subtest: tốc độ di chuyển đúng hằng số (đi 1 giây = speed đơn vị)
+ok 18 - tốc độ di chuyển đúng hằng số (đi 1 giây = speed đơn vị)
+  ---
+  duration_ms: 0.783854
+  type: 'test'
+  ...
+# Subtest: sprint nhanh hơn đi bộ
+ok 19 - sprint nhanh hơn đi bộ
+  ---
+  duration_ms: 1.022458
+  type: 'test'
+  ...
+# Subtest: Bóng Mực đuổi theo và làm mất đom đóm
+ok 20 - Bóng Mực đuổi theo và làm mất đom đóm
+  ---
+  duration_ms: 0.775237
+  type: 'test'
+  ...
+# Subtest: không có input -> trạng thái không đổi ngoài thời gian
+ok 21 - không có input -> trạng thái không đổi ngoài thời gian
+  ---
+  duration_ms: 0.484239
+  type: 'test'
+  ...
+# Subtest: cùng seed -> cùng thế giới (tất định)
+ok 22 - cùng seed -> cùng thế giới (tất định)
+  ---
+  duration_ms: 3.24199
+  type: 'test'
+  ...
+# Subtest: khác seed -> thế giới khác nhau (xác suất cao)
+ok 23 - khác seed -> thế giới khác nhau (xác suất cao)
+  ---
+  duration_ms: 0.818042
+  type: 'test'
+  ...
+# Subtest: số lượng thực thể theo params
+ok 24 - số lượng thực thể theo params
+  ---
+  duration_ms: 0.419694
+  type: 'test'
+  ...
+# Subtest: mulberry32: chuỗi số lặp lại đúng với cùng seed
+ok 25 - mulberry32: chuỗi số lặp lại đúng với cùng seed
+  ---
+  duration_ms: 0.295559
+  type: 'test'
+  ...
+# Subtest: mọi thực thể nằm trong bán kính đảo
+ok 26 - mọi thực thể nằm trong bán kính đảo
+  ---
+  duration_ms: 0.615726
+  type: 'test'
+  ...
+# Subtest: ép vị trí qua params được tôn trọng (cho scenario test)
+ok 27 - ép vị trí qua params được tôn trọng (cho scenario test)
+  ---
+  duration_ms: 0.518548
+  type: 'test'
+  ...
+# Subtest: scenario: an-toan.json
+ok 28 - scenario: an-toan.json
+  ---
+  duration_ms: 234.918752
+  type: 'test'
+  ...
+# Subtest: scenario: bao-vay.json
+ok 29 - scenario: bao-vay.json
+  ---
+  duration_ms: 196.680918
+  type: 'test'
+  ...
+# Subtest: scenario: co-ban.json
+ok 30 - scenario: co-ban.json
+  ---
+  duration_ms: 180.367314
+  type: 'test'
+  ...
+# Subtest: tất định: an-toan.json chạy 2 lần ra cùng kết quả
+ok 31 - tất định: an-toan.json chạy 2 lần ra cùng kết quả
+  ---
+  duration_ms: 329.738727
+  type: 'test'
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1446.874652

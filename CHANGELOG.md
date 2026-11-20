@@ -2,6 +2,12 @@
 
 Tất cả thay đổi đáng nhớ của dự án. Tag phase tương ứng với mốc phát hành.
 
+## [phase-3] — 2026-11-20 (Ticket-03 — THAY ĐỔI LUẬT)
+
+- **[THAY THẾ]** Thắp đèn **tự động** khi mang đủ `required` đom đóm vào bán kính — bỏ phím E; sự kiện `lantern_rejected` xóa khỏi contract (R3.1). Lý do và ảnh hưởng: `docs/notes/design-changes.md`.
+- **[BỔ SUNG]** Bóng Mực **bỏ chạy** khỏi đèn đã thắp trong `lightRadius=5` với `fleeSpeed=4.0`; flag `fleeing` trong output headless (R3.2, R3.5). Đèn đã thắp giờ là vùng trú ẩn.
+- 3 test cũ sửa kèm lý do (không tắt âm thầm); 25 → **31 test**, 3 scenario. Bằng chứng: `docs/proof/phase-3.md`.
+
 ## [phase-2] — 2026-11-20 (Ticket-02)
 
 - Đèn Lồng Lớn cần `requiredFireflies` (mặc định 3) đom đóm để thắp; thiếu thì có sự kiện `lantern_rejected` (R2.1).

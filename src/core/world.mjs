@@ -60,7 +60,7 @@ export function createWorld(params = {}) {
   for (let i = 0; i < inkCount; i++) {
     const p = (params.inkPositions && params.inkPositions[i]) ||
       rndPointInCircle(rnd, C.WORLD.radius * 0.7);
-    inks.push({ id: i, x: p.x, z: p.z, dirX: 0, dirZ: 0 });
+    inks.push({ id: i, x: p.x, z: p.z, dirX: 0, dirZ: 0, fleeing: false });
   }
 
   return { seed, params, player, lanterns, fireflies, inks, elapsedSeconds: 0, status: 'playing' };

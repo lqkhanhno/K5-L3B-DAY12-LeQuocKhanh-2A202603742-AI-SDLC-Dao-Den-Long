@@ -2,6 +2,7 @@
 // Đây là "trái tim" chạy được cả headless lẫn view. Mỗi tick là một bước TICK_DT giây.
 // Đầu vào: world + intent của người chơi (di chuyển, hành động). Đầu ra: world thay đổi tại chỗ + sự kiện.
 // [Phase 2] thêm: đèn cần `required` đom đóm (R2.1), Bóng Mực bao vây khi ≥2 con (R2.3).
+// [Phase 3] THAY THẾ: thắp đèn tự động bỏ phím E (R3.1); Bóng Mực bỏ chạy khỏi đèn đã thắp (R3.2).
 
 import * as C from './constants.mjs';
 
@@ -37,50 +38,72 @@ export function step(world, input = {}) {
     }
   }
 
-  // 3) Thắp đèn: hành động "thắp" khi đứng gần đèn còn tối.
-  // [Phase 2 / R2.1] cần đủ `required` đom đóm; thiếu thì không thắp, không mất gì,
-  // phát sự kiện lantern_rejected kèm have/need để headless kiểm chứng được.
-  if (input.action) {
-    for (const l of world.lanterns) {
-      if (!l.lit && dist2(world.player.x, world.player.z, l.x, l.z) <= C.LANTERN.litRadius ** 2) {
-        if (world.player.fireflies >= l.required) {
-          l.lit = true;
-          world.player.fireflies -= l.required;
-          events.push({ type: 'lantern_lit', x: l.x, z: l.z, remainingFireflies: world.player.fireflies });
-        } else {
-          events.push({ type: 'lantern_rejected', x: l.x, z: l.z, have: world.player.fireflies, need: l.required });
-        }
-      }
+  // 3) Thắp đèn: [Phase 3 / R3.1 — THAY THẾ luật Phase 1–2] đèn TỰ thắp khi người chơi
+  // đứng đủ gần và mang đủ `required` đom đóm. Không cần phím; thiếu thì im lặng (không có sự kiện).
+  for (const l of world.lanterns) {
+    if (!l.lit && world.player.fireflies >= l.required &&
+        dist2(world.player.x, world.player.z, l.x, l.z) <= C.LANTERN.litRadius ** 2) {
+      l.lit = true;
+      world.player.fireflies -= l.required;
+      events.push({ type: 'lantern_lit', x: l.x, z: l.z, remainingFireflies: world.player.fireflies });
     }
   }
 
-  // 4) Bóng Mực: [Phase 2 / R2.3] 1 con đuổi thẳng (như Phase 1); từ 2 con trở lên,
-  // ngoài followRadius đuổi thẳng, trong followRadius thì vòng quanh người chơi
-  // (giữ khoảng cách hiện tại, góc tăng đều orbitAngularSpeed — chiều kim đồng hồ nhìn từ trên).
+  // 4) Bóng Mực: [Phase 3 / R3.2] trong bán kính lightRadius của đèn ĐÃ THẮP -> bỏ chạy (ưu tiên cao nhất).
+  // [Phase 2 / R2.3] từ 2 con, ngoài vùng sáng: trong followRadius thì vòng quanh, ngoài đó đuổi thẳng.
   for (const ink of world.inks) {
-    const dx = world.player.x - ink.x;
-    const dz = world.player.z - ink.z;
-    const d = Math.hypot(dx, dz) || 1e-9;
-    if (world.inks.length >= 2 && d < C.INK.followRadius) {
-      // Chế độ bao vây: di chuyển tiếp tuyến quanh người chơi, giữ gần bán kính hiện tại.
-      const ang = Math.atan2(ink.z - world.player.z, ink.x - world.player.x);
-      const nextAng = ang + C.INK.orbitAngularSpeed * C.TICK_DT;
-      const keepR = Math.max(d, C.INK.catchRadius * 1.2); // không tự lao vào người chơi
-      const targetX = world.player.x + Math.cos(nextAng) * keepR;
-      const targetZ = world.player.z + Math.sin(nextAng) * keepR;
-      // Di chuyển về mục tiêu với tốc độ INK, giới hạn bởi độ dài bước.
-      const stepLen = C.INK.speed * C.TICK_DT;
-      const moveX = targetX - ink.x, moveZ = targetZ - ink.z;
-      const moveLen = Math.hypot(moveX, moveZ) || 1e-9;
-      const k = Math.min(1, stepLen / moveLen);
-      ink.x += moveX * k;
-      ink.z += moveZ * k;
-      ink.dirX = moveX / moveLen; ink.dirZ = moveZ / moveLen;
+    // Tìm đèn đã thắp gần nhất trong vùng sáng (nếu có).
+    let fleeFrom = null;
+    for (const l of world.lanterns) {
+      if (l.lit && dist2(ink.x, ink.z, l.x, l.z) <= C.INK.lightRadius ** 2) {
+        if (!fleeFrom || dist2(ink.x, ink.z, l.x, l.z) < dist2(ink.x, ink.z, fleeFrom.x, fleeFrom.z)) {
+          fleeFrom = l;
+        }
+      }
+    }
+    ink.fleeing = false;
+
+    if (fleeFrom) {
+      // Bỏ chạy: di chuyển ra xa đèn theo tốc độ fleeSpeed.
+      const fx = ink.x - fleeFrom.x, fz = ink.z - fleeFrom.z;
+      const d = Math.hypot(fx, fz) || 1e-9;
+      ink.dirX = fx / d; ink.dirZ = fz / d;
+      ink.x += ink.dirX * C.INK.fleeSpeed * C.TICK_DT;
+      ink.z += ink.dirZ * C.INK.fleeSpeed * C.TICK_DT;
+      ink.fleeing = true;
+    } else if (world.inks.length >= 2) {
+      const dx = world.player.x - ink.x;
+      const dz = world.player.z - ink.z;
+      const d = Math.hypot(dx, dz) || 1e-9;
+      if (d < C.INK.followRadius) {
+        // Chế độ bao vây: di chuyển tiếp tuyến quanh người chơi, giữ gần bán kính hiện tại.
+        const ang = Math.atan2(ink.z - world.player.z, ink.x - world.player.x);
+        const nextAng = ang + C.INK.orbitAngularSpeed * C.TICK_DT;
+        const keepR = Math.max(d, C.INK.catchRadius * 1.2); // không tự lao vào người chơi
+        const targetX = world.player.x + Math.cos(nextAng) * keepR;
+        const targetZ = world.player.z + Math.sin(nextAng) * keepR;
+        const stepLen = C.INK.speed * C.TICK_DT;
+        const moveX = targetX - ink.x, moveZ = targetZ - ink.z;
+        const moveLen = Math.hypot(moveX, moveZ) || 1e-9;
+        const k = Math.min(1, stepLen / moveLen);
+        ink.x += moveX * k;
+        ink.z += moveZ * k;
+        ink.dirX = moveX / moveLen; ink.dirZ = moveZ / moveLen;
+      } else {
+        ink.dirX = dx / d; ink.dirZ = dz / d;
+        ink.x += ink.dirX * C.INK.speed * C.TICK_DT;
+        ink.z += ink.dirZ * C.INK.speed * C.TICK_DT;
+      }
     } else {
+      // 1 con: đuổi thẳng (hành vi Phase 1).
+      const dx = world.player.x - ink.x;
+      const dz = world.player.z - ink.z;
+      const d = Math.hypot(dx, dz) || 1e-9;
       ink.dirX = dx / d; ink.dirZ = dz / d;
       ink.x += ink.dirX * C.INK.speed * C.TICK_DT;
       ink.z += ink.dirZ * C.INK.speed * C.TICK_DT;
     }
+
     if (dist2(world.player.x, world.player.z, ink.x, ink.z) <= C.INK.catchRadius ** 2 &&
         world.player.fireflies > 0) {
       world.player.fireflies = Math.max(0, world.player.fireflies - C.INK.drainOnCatch);
