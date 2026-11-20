@@ -1,0 +1,6 @@
+ĐẠT  R4.1 100k tick: 702 ms (ngưỡng 5000 ms), status=playing, ticks=100000
+ĐẠT  R4.2 thế giới 1000/50/20: 12.2 ms (ngưỡng 100 ms), thực thể=1070
+ĐẠT  R4.3a tất định 10 lần: 10 output giống hệt từng byte
+ĐẠT  R4.3b ổn định thời gian: max/lần đầu = 1.00× (ngưỡng 2×); lần đầu 878 ms, max 878 ms
+
+KẾT LUẬN: mọi ngưỡng ĐẠT.
