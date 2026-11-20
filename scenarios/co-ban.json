@@ -1,0 +1,22 @@
+{
+  "name": "co-ban-gom-va-thap",
+  "description": "Scenario cơ bản: gom 1 đom đóm gần chỗ đứng, tiến về đèn lồng và thắp. Dùng làm smoke test của headless runner.",
+  "world": {
+    "seed": 7,
+    "fireflyCount": 2,
+    "lanternCount": 1,
+    "fireflyPositions": [{ "x": 0.5, "z": 0 }, { "x": -15, "z": -15 }],
+    "lanternPositions": [{ "x": 2, "z": 0 }]
+  },
+  "script": [
+    { "ticks": 1, "moveX": 0, "moveZ": 0 },
+    { "ticks": 8, "moveX": 1, "moveZ": 0 },
+    { "ticks": 1, "moveX": 1, "moveZ": 0, "action": true }
+  ],
+  "expect": {
+    "status": "won",
+    "firefliesCollected": 1,
+    "lanternsLit": 1,
+    "eventsInclude": ["firefly_collected", "lantern_lit", "game_won"]
+  }
+}
